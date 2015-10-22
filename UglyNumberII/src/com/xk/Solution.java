@@ -1,41 +1,52 @@
 package com.xk;
 /*
- * Èç¹ûÒ»¸öÊı·Ö½âÖÊÒòÊıºó£¬Òò×ÓÖ»ÓĞ2,3,5ÕâÈıÖÖ£¬Ôò¸ÃÊıÎªugly number¡£ÇóµÚn¸öugly number¡£
-
-»ù±¾Ë¼Â·¾ÍÊÇÒÀ´ÎÉú³ÉÇ°n¸öugly number¡£ÎÒÃÇĞèÒª½«2,3,5¼°Æä¸÷ÖÖ×éºÏµÄ³Ë»ı×÷ÎªºòÑ¡¡£´óÌå¿ÉÒÔ·ÖÎª3Àà£º
-
-2£º 1¡Á2  2¡Á2  3¡Á2  4¡Á2  5¡Á2  6¡Á2  8¡Á2
-
-3£º 1¡Á3  2¡Á3  3¡Á3  4¡Á3  5¡Á3  6¡Á3  8¡Á3
-
-5£º 1¡Á5  2¡Á5  3¡Á5  4¡Á5  5¡Á5  6¡Á5  8¡Á5
-
-ÎÒÃÇĞèÒª×öµÄ¾ÍÊÇ´ÓÕâĞ©ºòÑ¡ÖĞ°´ÕÕ´ÓĞ¡µ½´óµÄË³Ğò£¬½«Æä×÷ÎªÇ°n¸öugly number¡£
-
-ÎÒÃÇ×¢Òâµ½£¬ÉÏÃæÕâ¸ö±í¸ñÖĞµÄÃ¿Ò»Ïî¶¼ÓÉÁ½¸öÊıÏà³Ë¡£×ó±ßµÄÊı¾ÍÊÇ2,3,5ÆäÖĞÖ®Ò»£¬ÓÒ±ßµÄÊı¾ÍÊÇÒÑ¾­Éú³ÉµÄugly number¡£
-
-Ê¹ÓÃÊı×é index ºÍ factor À´¿ØÖÆË³Ğò¡£
+ * We can see that ugly numbers consist of 
+ * 2: 1*2 2*2 3*2 4*2 5*2 8*2 9*2
+ *      â¬†    â¬†   â¬†   â¬†   â¬†  â¬†    â¬†
+ * a:   0      1      2     3   ï¸
+ * 3: 1*3 2*3 3*3 4*3 5*3 8*3 9*3
+ *      â¬†    â¬†
+ * b:  0      1
+ * 5: 1*5 2*5 3*5 4*5 5*5 8*5 9*5
+ *     â¬†
+ * c:  0
+ * for each column, right side numbers are 2, 3, 5
+ * left side numbers are ugly numbers in sequence
  * 
+ * The solution is based on Merge Sort
+ * we can use 3 additional numbers to record position in each arrayï¼Œ which helps keep ugly numbers in order
  * 
  * */
 public class Solution {
 	public static int nthUglyNumber(int n) {
-		int[] uglyNumber = new int[n];
-        int[] index = new int[3]; // respectively for 2,3,5
-        int[] factor = {2, 3, 5}; // respectively for 2,3,5
-        uglyNumber[0] = 1; 
-        for(int i = 1; i < n; i++){
-            int min = Math.min(Math.min(factor[0], factor[1]), factor[2]);
-            uglyNumber[i] = min;
-            if(min == factor[0]) factor[0] = 2 * uglyNumber[++index[0]];
-            if(min == factor[1]) factor[1] = 3 * uglyNumber[++index[1]];
-            if(min == factor[2]) factor[2] = 5 * uglyNumber[++index[2]];            
-        }
-        return uglyNumber[n - 1];
+		if(n<=0)
+			return 0;
+		int[] factor = {2, 3, 5};
+		int[] uglynum = new int[n];
+		uglynum[0] = 1;
+		int a=0, b=0, c=0;
+		for(int i=1;i<n;i++){
+			int min = Math.min(Math.min(factor[0], factor[1]),factor[2]);
+			uglynum[i] = min;
+			if(min ==factor[0])
+				factor[0]=2*uglynum[++a];
+			if(min ==factor[1])
+				factor[1]=3*uglynum[++b];
+			if(min ==factor[2])
+				factor[2]=5*uglynum[++c];
+		}
+		return uglynum[n-1];
 	}
 	
 	public static void main(String[] args){
 		int res = nthUglyNumber(10);
+		//for(int i: res)
 		System.out.println(res);
 	}
 }
+
+
+
+
+
+
