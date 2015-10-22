@@ -17,7 +17,23 @@ package com.xk;
  * we can use 3 additional numbers to record position in each array， which helps keep ugly numbers in order
  * 
  * */
+
 public class Solution {
+	public static boolean isUgly(int num) {
+		/* To judge whether a number is a ugly number, we just need to have it keep being divided by 2, 3 and 5. 
+		 * if the remain is 1, than it is a ugly number. 
+		 * */
+        if(num<=0)
+				return false;
+		while(num%2==0)
+				num/=2;
+		while(num%3==0)
+			num/=3;
+		while(num%5==0)
+			num/=5;
+		return num==1;
+    }
+	
 	public static int nthUglyNumber(int n) {
 		if(n<=0)
 			return 0;
