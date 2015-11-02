@@ -11,6 +11,18 @@ import java.util.*;
  * 1)如果prev的右孩子为空，那么prev.right = cur, cur更新为cur.left;
  * 2)如果prev的右孩子为cur，那么倒序输出cur.left到prev之间的节点(事实上，这些节点形成一条斜率为负的直线)，cur更新为cur.right
  * */
+/*                            0(dummy)                         
+ *                           / 
+ *                         5
+ *                       /    \
+ *                     4       8
+ *                   /         /  \
+ *                 11      13   4
+ *                /    \          /  \
+ *              7      2       5    1
+ * */
+
+
 public class Solution {
 	public static List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
