@@ -5,10 +5,10 @@ import java.util.*;
  *                         5
  *                       /    \
  *                     4       8
- *                   /        /    \
- *                 11      13    4
- *               /    \            /  \
- *              7     2         5    1
+ *                   /         /  \
+ *                 11      13   4
+ *                /    \          /  \
+ *              7      2       5    1
  * */
 // preorder traversal : 5 4 11 7 2 8 13 4 5 1 
 //Morris algorithm:
