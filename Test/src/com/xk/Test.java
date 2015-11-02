@@ -4,20 +4,7 @@ import java.util.*;
 
 public class Test {
 	public static ListNode swapPairs(ListNode head) {
-        if(head == null || head.next==null)
-            return head;
-        ListNode dummy = new ListNode(-1);
-        dummy.next = head;
-        ListNode slow = dummy, cur = head;
-        while(cur!=null && cur.next!=null){
-            ListNode next = cur.next.next;
-            slow.next = cur.next;
-            cur.next.next = cur;
-            cur.next = next;
-            slow = cur;
-            cur = next;
-        }
-        return dummy.next;
+        
     }
     
     public static void main(String[] args) {
