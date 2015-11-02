@@ -3,61 +3,76 @@ package com.xk;
 import java.util.*;
 //Morris Algorithm
 /*
- * Ëã·¨¾ßÌå·ÖÇé¿öÈçÏÂ£º
-1. Èç¹ûµ±Ç°½áµãµÄ×óº¢×ÓÎª¿Õ£¬ÔòÊä³öµ±Ç°½áµã²¢½«Æäµ±Ç°½Úµã¸³ÖµÎªÓÒº¢×Ó¡£
-2. Èç¹ûµ±Ç°½ÚµãµÄ×óº¢×Ó²»Îª¿Õ£¬ÔòÑ°ÕÒµ±Ç°½ÚµãÔÚÖĞĞò±éÀúÏÂµÄÇ°Çı½Úµã£¨Ò²¾ÍÊÇµ±Ç°½áµã×ó×ÓÊ÷µÄ×îÓÒº¢×Ó£©¡£½ÓÏÂÀ´·ÖÁ½ÖÖÇé¿ö£º
- a) Èç¹ûÇ°Çı½ÚµãµÄÓÒº¢×ÓÎª¿Õ£¬½«ËüµÄÓÒº¢×ÓÉèÖÃÎªµ±Ç°½Úµã£¨×öÏßË÷Ê¹µÃÉÔºó¿ÉÒÔÖØĞÂ·µ»Ø¸¸½áµã£©¡£È»ºó½«µ±Ç°½Úµã¸üĞÂÎªµ±Ç°½ÚµãµÄ×óº¢×Ó¡£
- b) Èç¹ûÇ°Çı½ÚµãµÄÓÒº¢×ÓÎªµ±Ç°½Úµã£¬±íÃ÷×ó×ÓÊ÷ÒÑ¾­·ÃÎÊÍê£¬¿ÉÒÔ·ÃÎÊµ±Ç°½Úµã¡£½«ËüµÄÓÒº¢×ÓÖØĞÂÉèÎª¿Õ£¨»Ö¸´Ê÷µÄ½á¹¹£©¡£Êä³öµ±Ç°½Úµã¡£
-             µ±Ç°½Úµã¸üĞÂÎªµ±Ç°½ÚµãµÄÓÒº¢×Ó¡£*/
+* ç®—æ³•å…·ä½“åˆ†æƒ…å†µå¦‚ä¸‹ï¼š
+1. å¦‚æœå½“å‰ç»“ç‚¹çš„å·¦å­©å­ä¸ºç©ºï¼Œåˆ™è¾“å‡ºå½“å‰ç»“ç‚¹å¹¶å°†å…¶å½“å‰èŠ‚ç‚¹èµ‹å€¼ä¸ºå³å­©å­ã€‚
+2. å¦‚æœå½“å‰èŠ‚ç‚¹çš„å·¦å­©å­ä¸ä¸ºç©ºï¼Œåˆ™å¯»æ‰¾å½“å‰èŠ‚ç‚¹åœ¨ä¸­åºéå†ä¸‹çš„å‰é©±èŠ‚ç‚¹ï¼ˆä¹Ÿå°±æ˜¯å½“å‰ç»“ç‚¹å·¦å­æ ‘çš„æœ€å³å­©å­ï¼‰ã€‚æ¥ä¸‹æ¥åˆ†ä¸¤ç§æƒ…å†µï¼š
+a) å¦‚æœå‰é©±èŠ‚ç‚¹çš„å³å­©å­ä¸ºç©ºï¼Œå°†å®ƒçš„å³å­©å­è®¾ç½®ä¸ºå½“å‰èŠ‚ç‚¹ï¼ˆåšçº¿ç´¢ä½¿å¾—ç¨åå¯ä»¥é‡æ–°è¿”å›çˆ¶ç»“ç‚¹ï¼‰ã€‚
+    ç„¶åå°†å½“å‰èŠ‚ç‚¹æ›´æ–°ä¸ºå½“å‰èŠ‚ç‚¹çš„å·¦å­©å­ã€‚
+b) å¦‚æœå‰é©±èŠ‚ç‚¹çš„å³å­©å­ä¸ºå½“å‰èŠ‚ç‚¹ï¼Œè¡¨æ˜å·¦å­æ ‘å·²ç»è®¿é—®å®Œï¼Œå¯ä»¥è®¿é—®å½“å‰èŠ‚ç‚¹ã€‚
+    å°†å®ƒçš„å³å­©å­é‡æ–°è®¾ä¸ºç©ºï¼ˆæ¢å¤æ ‘çš„ç»“æ„ï¼‰ã€‚è¾“å‡ºå½“å‰èŠ‚ç‚¹ã€‚
+    å½“å‰èŠ‚ç‚¹æ›´æ–°ä¸ºå½“å‰èŠ‚ç‚¹çš„å³å­©å­ã€‚
+ */
+/*
+ *                         5
+ *                       /    \
+ *                     4       8
+ *                   /        /    \
+ *                 11      13    4
+ *               /    \            /  \
+ *              7     2         5    1
+ * */
+
 public class Solution {
-//	public List<Integer> inorderTraversal(TreeNode root) {
-//        List<Integer> list = new ArrayList<Integer>();
-//        if(root == null)
-//            return list;
-//        TreeNode curr = root, prev = null;
-//        while(curr!=null){
-//            if(curr.left == null){
-//                list.add(curr.val);
-//                curr = curr.right;
-//            }else{
-//                prev = curr.left;
-//                while(prev.right!=null && prev.right != curr)
-//                    prev = prev.right;
-//                if(prev.right == null){
-//                    prev.right = curr;
-//                    curr = curr.left;
-//                }
-//                else{
-//                    prev.right = null;
-//                    list.add(curr.val);
-//                    curr = curr.right;
-//                }
-//            }
-//        }
-//        return list;
-//    }
-	
+	//Morris  Traversal Algorithm
+	//Time Complexity: O(n)
+	//Space Complexity: O(1)
 	public List<Integer> inorderTraversal(TreeNode root) {
-		ArrayList<Integer> res = new ArrayList<Integer>();  
-	    LinkedList<TreeNode> stack = new LinkedList<TreeNode>();  
-	    while(root!=null || !stack.isEmpty())  
-	    {  
-	        if(root!=null)  
-	        {  
-	        	res.add(root.val);
-	            stack.push(root);  
-	            root = root.left;  
-	        }  
-	        else  
-	        {  
-	            root = stack.pop();  
-	            //res.add(root.val);  
-	            root = root.right;  
-	        }  
-	    }  
-	    return res;   
-	}
+        List<Integer> list = new ArrayList<Integer>();
+        if(root == null)
+            return list;
+        TreeNode curr = root, prev = null;
+        while(curr!=null){
+        	if(curr.left==null){
+        		list.add(curr.val);
+        		curr = curr.right;
+        	}else{
+        		prev = curr.left;
+        		while(prev.right!=null && prev.right!=curr)
+        			prev = prev.right;
+        		if(prev.right == null){
+        			prev.right = curr;
+        			curr = curr.left;
+        		}else{
+        			prev.right = null;
+        			list.add(curr.val);
+        			curr = curr.right;
+        		}
+        	}
+        }
+        return list;
+    }
 	
+//	public List<Integer> inorderTraversal(TreeNode root) {
+//		ArrayList<Integer> res = new ArrayList<Integer>();  
+//	    LinkedList<TreeNode> stack = new LinkedList<TreeNode>();  
+//	    while(root!=null || !stack.isEmpty())  
+//	    {  
+//	        if(root!=null)  
+//	        {  
+//	        	res.add(root.val);
+//	            stack.push(root);  
+//	            root = root.left;  
+//	        }  
+//	        else  
+//	        {  
+//	            root = stack.pop();  
+//	            //res.add(root.val);  
+//	            root = root.right;  
+//	        }  
+//	    }  
+//	    return res;   
+//	}
+	//5 4 11 7 2 8 13 4 5 1 
 	public static void main(String[] args){
 		 TreeNode root = new TreeNode(5);
 		 TreeNode node1 = new TreeNode(4);

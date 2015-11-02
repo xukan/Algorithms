@@ -2,6 +2,9 @@ package com.xk;
 /*
  * bull = number of elements that both value and index are equal.|| secret与guess下标与数值均相同的数字个数
  * cow = number of elements that appear in secret but position is not correct||secret中有这个数字但是下标不对的数字的个数
+ * 
+ * Time complexity: O(n)
+ * Space complexity: O(1)
  * */
 public class Solution {
 	public static String getHint(String secret, String guess) {
