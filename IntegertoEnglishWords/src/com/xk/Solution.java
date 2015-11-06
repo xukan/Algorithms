@@ -1,54 +1,53 @@
 package com.xk;
-/*
+/* Reference:
  * http://www.cnblogs.com/grandyang/p/4772780.html
- *ÍøÉÏ´óÉñÃÇµÄ½â·¨¶¼ÊÇÓÃÊı×éÀ´Ã¶¾ÙµÄ£¬ÌØ±ğµÄÇÉÃî¶øÇÒÊ¡µØ·½£¬Ä¤°İÑ§Ï°ÖĞ¡£
- *ÌâÄ¿ÖĞ¸ø×ãÁËÌáÊ¾£¬Ê×ÏÈ¸æËßÎÒÃÇÒª3¸öÒ»×éµÄ½øĞĞ´¦Àí£¬¶øÇÒÌâÄ¿ÖĞÏŞ¶¨ÁËÊäÈëÊı×Ö·¶Î§Îª0µ½231 - 1Ö®¼ä£¬×î¸ßÖ»ÄÜµ½billionÎ»£¬3¸öÒ»×éÒ²Ö»Ğè´¦ÀíËÄ×é¼´¿É£¬
- *ÄÇÃ´ÎÒÃÇĞèÒªĞ©Ò»¸ö´¦ÀíÈı¸öÒ»×éÊı×ÖµÄº¯Êı£¬ÎÒÃÇĞèÒª°Ñ1µ½19µÄÓ¢ÎÄµ¥´Ê¶¼ÁĞ³öÀ´£¬·Åµ½Ò»¸öÊı×éÀï£¬»¹Òª°Ñ20,30£¬... µ½90µÄÓ¢ÎÄµ¥´ÊÁĞ³öÀ´·Åµ½ÁíÒ»¸öÊı×éÀï£¬
- *È»ºóÎÒÃÇĞèÒªÓÃĞ´¼¼ÇÉ£¬±ÈÈçÒ»¸öÈıÎ»Êın£¬°ÙÎ»Êı±íÊ¾Îªn/100£¬ºóÁ½Î»ÊıÒ»Æğ±íÊ¾Îªn%100£¬Ê®Î»Êı±íÊ¾Îªn%100/10£¬¸öÎ»Êı±íÊ¾Îªn%10£¬
- *È»ºóÎÒÃÇ¿´ºóÁ½Î»ÊıÊÇ·ñĞ¡ÓÚ20£¬Ğ¡ÓÚµÄ»°Ö±½Ó´ÓÊı×éÖĞÈ¡³öµ¥´Ê£¬Èç¹û´óÓÚµÈÓÚ20µÄ»°£¬Ôò·Ö±ğ½«Ê®Î»ºÍ¸öÎ»Êı×ÖµÄµ¥´Ê´ÓÁ½¸öÊı×éÖĞÈ¡³öÀ´¡£È»ºóÔÙÀ´´¦Àí°ÙÎ»ÉÏµÄÊı×Ö£¬»¹Òª¼ÇµÃ¼ÓÉÏHundred¡£
- *Ö÷º¯ÊıÖĞµ÷ÓÃËÄ´ÎÕâ¸ö°ïÖúº¯Êı£¬È»ºóÖĞ¼äÒª²åÈë"Thousand", "Million", "Billion"µ½¶ÔÓ¦µÄÎ»ÖÃ£¬×îºócheckÒ»ÏÂÄ©Î²ÊÇ·ñÓĞ¿Õ¸ñ£¬°Ñ¿Õ¸ñ¶¼É¾µô£¬
- *·µ»ØµÄÊ±ºò¼ì²éÏÂÊäÈëÊÇ·ñÎª0£¬ÊÇµÄ»°Òª·µ»Ø'Zero'¡££º
+ * http://blog.welkinlan.com/2015/09/29/integer-to-english-words-leetcode-java/
+ *ç½‘ä¸Šå¤§ç¥ä»¬çš„è§£æ³•éƒ½æ˜¯ç”¨æ•°ç»„æ¥æšä¸¾çš„ï¼Œç‰¹åˆ«çš„å·§å¦™è€Œä¸”çœåœ°æ–¹ï¼Œè†œæ‹œå­¦ä¹ ä¸­ã€‚
+ *é¢˜ç›®ä¸­ç»™è¶³äº†æç¤ºï¼Œé¦–å…ˆå‘Šè¯‰æˆ‘ä»¬è¦3ä¸ªä¸€ç»„çš„è¿›è¡Œå¤„ç†ï¼Œè€Œä¸”é¢˜ç›®ä¸­é™å®šäº†è¾“å…¥æ•°å­—èŒƒå›´ä¸º0åˆ°231 - 1ä¹‹é—´ï¼Œæœ€é«˜åªèƒ½åˆ°billionä½ï¼Œ3ä¸ªä¸€ç»„ä¹Ÿåªéœ€å¤„ç†å››ç»„å³å¯ï¼Œ
+ *é‚£ä¹ˆæˆ‘ä»¬éœ€è¦äº›ä¸€ä¸ªå¤„ç†ä¸‰ä¸ªä¸€ç»„æ•°å­—çš„å‡½æ•°ï¼Œæˆ‘ä»¬éœ€è¦æŠŠ1åˆ°19çš„è‹±æ–‡å•è¯éƒ½åˆ—å‡ºæ¥ï¼Œæ”¾åˆ°ä¸€ä¸ªæ•°ç»„é‡Œï¼Œè¿˜è¦æŠŠ20,30ï¼Œ... åˆ°90çš„è‹±æ–‡å•è¯åˆ—å‡ºæ¥æ”¾åˆ°å¦ä¸€ä¸ªæ•°ç»„é‡Œï¼Œ
+ *ç„¶åæˆ‘ä»¬éœ€è¦ç”¨å†™æŠ€å·§ï¼Œæ¯”å¦‚ä¸€ä¸ªä¸‰ä½æ•°nï¼Œç™¾ä½æ•°è¡¨ç¤ºä¸ºn/100ï¼Œåä¸¤ä½æ•°ä¸€èµ·è¡¨ç¤ºä¸ºn%100ï¼Œåä½æ•°è¡¨ç¤ºä¸ºn%100/10ï¼Œä¸ªä½æ•°è¡¨ç¤ºä¸ºn%10ï¼Œ
+ *ç„¶åæˆ‘ä»¬çœ‹åä¸¤ä½æ•°æ˜¯å¦å°äº20ï¼Œå°äºçš„è¯ç›´æ¥ä»æ•°ç»„ä¸­å–å‡ºå•è¯ï¼Œå¦‚æœå¤§äºç­‰äº20çš„è¯ï¼Œåˆ™åˆ†åˆ«å°†åä½å’Œä¸ªä½æ•°å­—çš„å•è¯ä»ä¸¤ä¸ªæ•°ç»„ä¸­å–å‡ºæ¥ã€‚ç„¶åå†æ¥å¤„ç†ç™¾ä½ä¸Šçš„æ•°å­—ï¼Œè¿˜è¦è®°å¾—åŠ ä¸ŠHundredã€‚
+ *ä¸»å‡½æ•°ä¸­è°ƒç”¨å››æ¬¡è¿™ä¸ªå¸®åŠ©å‡½æ•°ï¼Œç„¶åä¸­é—´è¦æ’å…¥"Thousand", "Million", "Billion"åˆ°å¯¹åº”çš„ä½ç½®ï¼Œæœ€åcheckä¸€ä¸‹æœ«å°¾æ˜¯å¦æœ‰ç©ºæ ¼ï¼ŒæŠŠç©ºæ ¼éƒ½åˆ æ‰ï¼Œ
+ *è¿”å›çš„æ—¶å€™æ£€æŸ¥ä¸‹è¾“å…¥æ˜¯å¦ä¸º0ï¼Œæ˜¯çš„è¯è¦è¿”å›'Zero'ã€‚ï¼š
  * */
 public class Solution {
-//	public static String numberToWords(int num) {
-//		String[] bigs = {" Thousand"," Million"," Billion"};
-//		StringBuilder sb = new StringBuilder();
-//		int i=0;
-//		sb.append(convertToWord(num%1000));
-//		num/=1000;
-//		while(num!=0){
-//			if(num%1000!=0){
-//				sb.insert(0,convertToWord(num%1000)+bigs[i]);
-//			}
-//			i++;
-//			num/=1000;
-//		}
-//		return sb.length()==0?"Zero":sb.toString().trim();
-//	}
-//	
-//	public static String convertToWord(int num){
-//	    String[] digit = {"", " One", " Two", " Three", " Four", " Five",
-//        " Six", " Seven", " Eight", " Nine"};
-//String[] tenDigit = {" Ten", " Eleven", " Twelve", " Thirteen", " Fourteen", " Fifteen",
-//        " Sixteen", " Seventeen", " Eighteen", " Nineteen"};
-//String[] tenMutipleDigit = {"", "", " Twenty", " Thirty", " Forty", " Fifty",
-//        " Sixty", " Seventy", " Eighty", " Ninety"};
-//		StringBuilder sb = new StringBuilder();
-//		int a = num/100, b = num%100, c = num%10;
-//		if(a!=0){
-//			sb.append(digit[a]).append("Hundred");
-//		}
-//		if(9<b && b<20){
-//			sb.append(tenDigit[b-10]);
-//		}else{
-//			if(b>20){
-//				sb.append(tenMutipleDigit[b/10]);
-//			}
-//			sb.append(digit[c]);
-//		}
-//		return sb.toString();
-//	}
+	//recursive
+	private final String[] lessThan20 = {"", "One", "Two","Three", "Four", "Five", "Six", "Seven" , "Eight", "Nine",
+			"Ten", "Eleven" , "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+	private final String[] tens = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+	private final String[] thousands = {"", "Thousand", "Million", "Billion"};
 	
+	public String numberToWords(int num) {
+		if (num == 0) {
+		    return "Zero";
+		}
+		String result = "";
+		int i = 0;
+		while (num > 0) {
+		    if (num % 1000 != 0) {
+		        result = helper(num % 1000) + thousands[i] + " " + result;    
+		    }
+		    num /= 1000;
+		    i++;
+		}
+		return result.trim();
+	}
+
+	private String helper(int num) {
+	    if (num == 0) {
+	        return "";
+	    } else if (num < 20) {
+	        return lessThan20[num] + " ";
+	    } else if (num < 100) {
+	        return tens[num / 10] + " " + helper(num % 10);
+	    } else {
+	        return lessThan20[num / 100] + " Hundred " + helper(num % 100);
+	    }
+	}
+	
+	
+	//unrecursive
+	/*
 	 public static String numberToWords(int num) {
 	        String[] bigs = {" Thousand", " Million", " Billion"};
 	        int i=0;
@@ -84,11 +83,12 @@ public class Solution {
 	        }
 	        return sb.toString();
 	    }
-	
+	*/
 	public static void main(String[] args) {
 //		int input = 1000010;
 		int input = 1234560;
-		String res = numberToWords(input);
+		Solution s = new Solution();
+		String res = s.numberToWords(input);
 		System.out.println(res);
 	}
 }
