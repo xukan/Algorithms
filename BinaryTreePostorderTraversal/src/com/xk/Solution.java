@@ -22,7 +22,6 @@ import java.util.*;
  *              7      2       5    1
  * */
 
-
 public class Solution {
 	public static List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
@@ -117,7 +116,7 @@ public class Solution {
 		 
 		 TreeNode test = new TreeNode(5);
 		 Solution s = new Solution();
-		 List<Integer> res = postorderTraversal(test);
+		 List<Integer> res = postorderTraversal(root);
 		 for(Integer i : res)
 			 System.out.print(i+" ");
 		 System.out.println();
