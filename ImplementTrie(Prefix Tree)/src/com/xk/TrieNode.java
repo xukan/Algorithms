@@ -4,12 +4,12 @@ import java.util.*;
 
 public class TrieNode {
 	// Initialize your data structure here.
-    char content; //½ÚµãÄÚÈİ
-    boolean isEnd;//ÊÇ·ñÎªÒ»¸öµ¥´ÊµÄ½áÎ²
-    LinkedList<TrieNode> child;//¸Ã½ÚµãËùÓĞµÄº¢×Ó½Úµã
+    char content; //èŠ‚ç‚¹å†…å®¹
+    boolean isEnd;//æ˜¯å¦ä¸ºä¸€ä¸ªå•è¯çš„ç»“å°¾
+    LinkedList<TrieNode> child;//è¯¥èŠ‚ç‚¹æ‰€æœ‰çš„å­©å­èŠ‚ç‚¹
     int count;// the number of words sharing this character
     
-   //´ËÎª¸ù½áµãµÄ¹¹Ôìº¯Êı£¬¸ù½áµã²»°üº¬ÈÎºÎÄÚÈİ
+   //æ­¤ä¸ºæ ¹ç»“ç‚¹çš„æ„é€ å‡½æ•°ï¼Œæ ¹ç»“ç‚¹ä¸åŒ…å«ä»»ä½•å†…å®¹
    public TrieNode() {
        this.content=' ';
        this.isEnd=false;
@@ -17,7 +17,7 @@ public class TrieNode {
        this.count = 0;
    }
 
-   //´ËÎª°üº¬ÄÚÈİ½ÚµãµÄ¹¹Ôìº¯Êı
+   //æ­¤ä¸ºåŒ…å«å†…å®¹èŠ‚ç‚¹çš„æ„é€ å‡½æ•°
    public TrieNode(char content)
    {
        this.content=content;
@@ -26,7 +26,7 @@ public class TrieNode {
        this.count = 0;
    }
 
-   //ÔÚ¸Ã½ÚµãµÄº¢×Ó½Úµã²éÕÒÄ³Ò»¸ö½Úµã
+   //åœ¨è¯¥èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹æŸ¥æ‰¾æŸä¸€ä¸ªèŠ‚ç‚¹
    public TrieNode subNode(char content)
    {
        if(child!=null){
