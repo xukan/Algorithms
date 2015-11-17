@@ -21,10 +21,6 @@ public class Solution {
         return left && helper(root.right,pre);
     }
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> 213090bf72ac5b91d4fd204862c5d7e9d55c0353
 	public static void main(String[] args){
 		TreeNode node1 = new TreeNode(5);
 		TreeNode node2 = new TreeNode(2);

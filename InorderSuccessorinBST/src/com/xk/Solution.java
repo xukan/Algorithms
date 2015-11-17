@@ -25,7 +25,10 @@ import java.util.ArrayList;
  *                          \
  *                          17
  * */
-
+/*
+ * Example: how to recursively insert node in BST
+ * http://www.geeksforgeeks.org/find-the-minimum-element-in-a-binary-search-tree/
+ * */
 public class Solution {
 	public static  TreeNode root=null;
 	public static TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
@@ -53,6 +56,50 @@ public class Solution {
 		while(node.left!=null)
 			node = node.left;
 		return node;
+	}
+	
+	public static int findMax(TreeNode node){
+		if(node==null)
+			return -1;
+		else
+			return Math.max(findMax(node.left), findMax(node.right));
+	}
+	
+	public static boolean isBST(TreeNode  root)
+	{
+		TreeNode  prev = null;
+	     
+	    // traverse the tree in inorder fashion and keep track of prev node
+	    if (root!=null)
+	    {
+	        if (!isBST(root.left))
+	          return false;
+	 
+	        // Allows only distinct valued nodes 
+	        if (prev != null && root.val <= prev.val)
+	          return false;
+	 
+	        prev = root;
+	 
+	        return isBST(root.right);
+	    }
+	 
+	    return true;
+	}
+	
+	//more concise
+	public static TreeNode inorderSuccessor1(TreeNode root, TreeNode p){
+		TreeNode cur = root, succ=null;
+		while(cur!=null){
+			if(cur.val ==p.val)
+				cur=cur.right;
+			else if(cur.val>p.val){
+				succ= cur;
+				cur = cur.left;
+			}else
+				cur = cur.right;
+		}
+		return succ;
 	}
 	
 	public static void display(TreeNode root){
@@ -119,5 +166,13 @@ public class Solution {
 		 System.out.println(node4.val);
 		 TreeNode res1= inorderSuccessor(root, node4);
 		 System.out.println(res1.val);
+		 //another method which is more concise
+		 TreeNode res2= inorderSuccessor1(root, node4);
+		 System.out.println(res2.val);
+		 //find min value in BST:
+		 TreeNode min = findMin(node1);
+		 System.out.println("minimum value in BST: "+min.val);
+		 int max = findMax(node1);
+		 System.out.println("maximum value in BST: "+max);
 	}
 }
